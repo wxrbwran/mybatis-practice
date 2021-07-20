@@ -7,11 +7,9 @@
   <!--数据库驱动个人配置-->
   <!--  <classPathEntry-->
   <!--    location="/Users/wuxiaoran/sites/java-learn/postgresql-42.2.12.jar" />-->
-  <context id="PostgreSqlTables" targetRuntime="MyBatis3">
+  <context id="PostgreSqlTables" targetRuntime="MyBatis3DynamicSql">
     <property name="autoDelimitKeywords" value="true"/>
     <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错-->
-    <property name="beginningDelimiter" value="`"/>
-    <property name="endingDelimiter" value="`"/>
     <!-- optional，旨在创建class时，对注释进行控制 -->
     <commentGenerator>
       <property name="suppressDate" value="true"/>
