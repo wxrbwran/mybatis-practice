@@ -1,0 +1,3 @@
+**
+!build/libs/naming-service-*.jar
+!app_launch.sh

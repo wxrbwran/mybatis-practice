@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="example.mybatis.model.dao.DealLogMapper">
+  <resultMap id="BaseResultMap" type="example.mybatis.model.pojo.DealLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+    <result column="person_score" jdbcType="VARCHAR" property="personScore" />
+    <result column="change_score" jdbcType="VARCHAR" property="changeScore" />
+    <result column="partner" jdbcType="INTEGER" property="partner" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, issue_id, person_score, change_score, partner, type, created_time, updated_time
+  </sql>
+  <select id="selectByExample" parameterType="example.mybatis.model.pojo.DealLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_team.t_jira_deal_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_team.t_jira_deal_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_team.t_jira_deal_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="example.mybatis.model.pojo.DealLogExample">
+    delete from s_team.t_jira_deal_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="example.mybatis.model.pojo.DealLog">
+    insert into s_team.t_jira_deal_log (id, issue_id, person_score, 
+      change_score, partner, type, 
+      created_time, updated_time)
+    values (#{id,jdbcType=INTEGER}, #{issueId,jdbcType=INTEGER}, #{personScore,jdbcType=VARCHAR}, 
+      #{changeScore,jdbcType=VARCHAR}, #{partner,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="example.mybatis.model.pojo.DealLog">
+    insert into s_team.t_jira_deal_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="personScore != null">
+        person_score,
+      </if>
+      <if test="changeScore != null">
+        change_score,
+      </if>
+      <if test="partner != null">
+        partner,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="personScore != null">
+        #{personScore,jdbcType=VARCHAR},
+      </if>
+      <if test="changeScore != null">
+        #{changeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="partner != null">
+        #{partner,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="example.mybatis.model.pojo.DealLogExample" resultType="java.lang.Long">
+    select count(*) from s_team.t_jira_deal_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_team.t_jira_deal_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.personScore != null">
+        person_score = #{record.personScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeScore != null">
+        change_score = #{record.changeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partner != null">
+        partner = #{record.partner,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdTime != null">
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null">
+        updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_team.t_jira_deal_log
+    set id = #{record.id,jdbcType=INTEGER},
+      issue_id = #{record.issueId,jdbcType=INTEGER},
+      person_score = #{record.personScore,jdbcType=VARCHAR},
+      change_score = #{record.changeScore,jdbcType=VARCHAR},
+      partner = #{record.partner,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{record.updatedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="example.mybatis.model.pojo.DealLog">
+    update s_team.t_jira_deal_log
+    <set>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="personScore != null">
+        person_score = #{personScore,jdbcType=VARCHAR},
+      </if>
+      <if test="changeScore != null">
+        change_score = #{changeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="partner != null">
+        partner = #{partner,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="example.mybatis.model.pojo.DealLog">
+    update s_team.t_jira_deal_log
+    set issue_id = #{issueId,jdbcType=INTEGER},
+      person_score = #{personScore,jdbcType=VARCHAR},
+      change_score = #{changeScore,jdbcType=VARCHAR},
+      partner = #{partner,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

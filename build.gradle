@@ -1,0 +1,51 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'cn.xinzhili.napp.autobuild'
+}
+
+ext {
+    set('springBootAdminVersion', "2.2.3")
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+allprojects {
+    sourceCompatibility = '11'
+}
+
+dependencies {
+
+    // - spring dev and ops tools
+    // - web server
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // - data handle and persistence
+    implementation 'org.mybatis:mybatis-typehandlers-jsr310'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
+    implementation 'org.mybatis.dynamic-sql:mybatis-dynamic-sql'
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.5'
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // - spring cloud
+
+    // - unit test
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.mybatis.generator:mybatis-generator-core'
+
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
